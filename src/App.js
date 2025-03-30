@@ -7,6 +7,7 @@ function App() {
   const [error, setError] = useState('');
   const [userCount, setUserCount] = useState(0);
   const [users, setUsers] = useState([]);
+  const [dateTime, setDateTime] = useState(new Date());
 
   const handleLogin = (username, password) => {
     if (username === 'admin' && password === 'admin') {
@@ -27,6 +28,11 @@ function App() {
       setUserCount(mockUsers.length);
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    const timer = setInterval(() => setDateTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   if (!isAuthenticated) {
     return (
@@ -98,6 +104,15 @@ function App() {
                 </div>
               </div>
             </div>
+            {/* Novo Bloco com Data e Hora */}
+            <div className="col-md-6 mb-4">
+              <div className="card">
+                <div className="card-body text-center">
+                  <h5 className="card-title">Data e Hora Atual</h5>
+                  <p className="card-text fs-4">{dateTime.toLocaleString()}</p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
@@ -109,8 +124,8 @@ function App() {
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Dado 123</th>
-                    <th>Dado 2xesss</th>
+                    <th>Dado 1</th>
+                    <th>Dado 2</th>
                     <th>Dado 3</th>
                     <th>Dado 4</th>
                   </tr>
