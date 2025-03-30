@@ -4,7 +4,7 @@ function App() { const [isAuthenticated, setIsAuthenticated] = useState(false); 
 
 const handleLogin = (username, password) => { if (username === 'admin' && password === 'admin') { setIsAuthenticated(true); setError(''); } else { setError('Usuário ou senha inválidos'); } };
 
-useEffect(() => { if (isAuthenticated) { const mockUsers = [ { id: 1, dados1: 'Dado 1', dados2: 'Dado 2', dados3: 'Dado 3', dados4: 'Dado 4', dados5: 'Dado 5' }, { id: 2, dados1: 'Dado 6', dados2: 'Dado 7', dados3: 'Dado 8', dados4: 'Dado 9', dados5: 'Dado 10' }, ]; setUsers(mockUsers); setUserCount(mockUsers.length); } }, [isAuthenticated]);
+useEffect(() => { if (isAuthenticated) { const mockUsers = [ { id: 1, dados1: 'Dado 1', dados2: 'Dado 2', dados3: 'Dado 3', dados4: 'Dado 4' }, { id: 2, dados1: 'Dado 5', dados2: 'Dado 6', dados3: 'Dado 7', dados4: 'Dado 8' }, ]; setUsers(mockUsers); setUserCount(mockUsers.length); } }, [isAuthenticated]);
 
 useEffect(() => { const timer = setInterval(() => setDateTime(new Date()), 1000); return () => clearInterval(timer); }, []);
 
@@ -31,15 +31,13 @@ return ( <div className="min-h-screen bg-light"> <header className="bg-primary t
           <div className="card">
             <div className="card-body text-center">
               <h5 className="card-title">Usuários Cadastrados</h5>
-              <div className="flip-clock">
-                <FlipClock
-                  time={userCount}
-                  countUp={false}
-                  flip={true}
-                  className="flip-clock"
-                  style={{ fontSize: '40px', fontWeight: 'bold' }}
-                />
-              </div>
+              <FlipClock
+                time={userCount}
+                countUp={false}
+                flip={true}
+                className="flip-clock"
+                style={{ fontSize: '40px', fontWeight: 'bold' }}
+              />
             </div>
           </div>
         </div>
