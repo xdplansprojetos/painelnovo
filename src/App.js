@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '@coreui/coreui/dist/css/coreui.min.css';
+import FlipClock from 'react-flip-clock';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -100,7 +101,13 @@ function App() {
               <div className="card">
                 <div className="card-body text-center">
                   <h5 className="card-title">Usuários Cadastrados</h5>
-                  <p className="card-text fs-4">{userCount}</p>
+                  <FlipClock
+                    time={userCount}
+                    countUp={false}
+                    flip={true}
+                    className="flip-clock"
+                    style={{ fontSize: '40px', fontWeight: 'bold' }}
+                  />
                 </div>
               </div>
             </div>
