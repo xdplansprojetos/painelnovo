@@ -31,13 +31,18 @@ return ( <div className="min-h-screen bg-light"> <header className="bg-primary t
           <div className="card">
             <div className="card-body text-center">
               <h5 className="card-title">Usuários Cadastrados</h5>
-              <div className="counter" style={{ fontFamily: 'Courier New, Courier, monospace', fontSize: '4rem', color: '#FF4500', border: '3px solid #FF4500', borderRadius: '10px', padding: '10px' }}>
-                {String(userCount).padStart(3, '0')}
+              <div className="flip-clock">
+                <FlipClock
+                  time={userCount}
+                  countUp={false}
+                  flip={true}
+                  className="flip-clock"
+                  style={{ fontSize: '40px', fontWeight: 'bold' }}
+                />
               </div>
             </div>
           </div>
         </div>
-
         <div className="col-md-6 mb-4">
           <div className="card">
             <div className="card-body text-center">
