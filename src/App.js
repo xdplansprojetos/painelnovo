@@ -109,7 +109,7 @@ function App() {
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Dado 1</th>
+                    <th>Dado 123</th>
                     <th>Dado 2</th>
                     <th>Dado 3</th>
                     <th>Dado 4</th>
