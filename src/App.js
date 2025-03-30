@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import '@coreui/coreui/dist/css/coreui.min.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -7,7 +7,6 @@ function App() {
   const [error, setError] = useState('');
   const [userCount, setUserCount] = useState(0);
   const [users, setUsers] = useState([]);
-  const [dateTime, setDateTime] = useState(new Date());
 
   const handleLogin = (username, password) => {
     if (username === 'admin' && password === 'admin') {
@@ -29,11 +28,6 @@ function App() {
     }
   }, [isAuthenticated]);
 
-  useEffect(() => {
-    const timer = setInterval(() => setDateTime(new Date()), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -52,47 +46,40 @@ function App() {
               name="username"
               placeholder="Usuário"
               required
-              className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="form-control mb-4"
             />
             <input
               type="password"
               name="password"
               placeholder="Senha"
               required
-              className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="form-control mb-4"
             />
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition"
-            >
+            <button type="submit" className="btn btn-primary w-100">
               Entrar
             </button>
           </form>
-          {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+          {error && <p className="text-danger mt-3 text-center">{error}</p>}
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-blue-500 text-white py-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-bold">Painel Admin</h1>
+    <div className="min-h-screen bg-light">
+      <header className="bg-primary text-white py-4">
+        <div className="container d-flex justify-content-between align-items-center">
+          <h1 className="h3">Painel Admin</h1>
           <nav>
             <button
               onClick={() => setActiveTab('inicial')}
-              className={`px-4 py-2 rounded-lg ${
-                activeTab === 'inicial' ? 'bg-white text-blue-500' : 'hover:bg-blue-600 transition'
-              }`}
+              className={`btn ${activeTab === 'inicial' ? 'btn-light text-primary' : 'btn-outline-light'} me-2`}
             >
               Inicial
             </button>
             <button
               onClick={() => setActiveTab('usuarios')}
-              className={`px-4 py-2 rounded-lg ml-2 ${
-                activeTab === 'usuarios' ? 'bg-white text-blue-500' : 'hover:bg-blue-600 transition'
-              }`}
+              className={`btn ${activeTab === 'usuarios' ? 'btn-light text-primary' : 'btn-outline-light'}`}
             >
               Usuários
             </button>
@@ -100,45 +87,47 @@ function App() {
         </div>
       </header>
 
-      <main className="container mx-auto py-8">
+      <main className="container py-5">
         {activeTab === 'inicial' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-xl font-semibold mb-2">Data e Hora</h3>
-              <p className="text-gray-700 text-lg">{dateTime.toLocaleString()}</p>
-            </div>
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-xl font-semibold mb-2">Usuários Cadastrados</h3>
-              <p className="text-gray-700 text-lg">{userCount}</p>
+          <div className="row">
+            <div className="col-md-6 mb-4">
+              <div className="card">
+                <div className="card-body text-center">
+                  <h5 className="card-title">Usuários Cadastrados</h5>
+                  <p className="card-text fs-4">{userCount}</p>
+                </div>
+              </div>
             </div>
           </div>
         )}
 
         {activeTab === 'usuarios' && (
-          <div className="bg-white shadow-lg rounded-lg p-6">
-            <h3 className="text-xl font-semibold mb-4">Lista de Usuários</h3>
-            <table className="w-full border-collapse border border-gray-200">
-              <thead>
-                <tr>
-                  <th className="border border-gray-300 p-2">ID</th>
-                  <th className="border border-gray-300 p-2">Dado 1</th>
-                  <th className="border border-gray-300 p-2">Dado 2</th>
-                  <th className="border border-gray-300 p-2">Dado 3</th>
-                  <th className="border border-gray-300 p-2">Dado 4</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-100">
-                    <td className="border border-gray-300 p-2 text-center">{user.id}</td>
-                    <td className="border border-gray-300 p-2 text-center">{user.dados1}</td>
-                    <td className="border border-gray-300 p-2 text-center">{user.dados2}</td>
-                    <td className="border border-gray-300 p-2 text-center">{user.dados3}</td>
-                    <td className="border border-gray-300 p-2 text-center">{user.dados4}</td>
+          <div className="card">
+            <div className="card-header">Lista de Usuários</div>
+            <div className="card-body">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Dado 1</th>
+                    <th>Dado 2</th>
+                    <th>Dado 3</th>
+                    <th>Dado 4</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {users.map((user) => (
+                    <tr key={user.id}>
+                      <td>{user.id}</td>
+                      <td>{user.dados1}</td>
+                      <td>{user.dados2}</td>
+                      <td>{user.dados3}</td>
+                      <td>{user.dados4}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </main>
